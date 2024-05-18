@@ -7,9 +7,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ''
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
     chart: prometheus
-    targetRevision: HEAD
+    targetRevision: 25.20.2
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: test
