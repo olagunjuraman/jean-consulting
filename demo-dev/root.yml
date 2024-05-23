@@ -1,16 +1,36 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: all-apps
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://github.com/olagunjuraman/jean-consulting'
+#     path: 'demo-dev/applications'
+#     targetRevision: HEAD
+#   destination:
+#     server: 'https://kubernetes.default.svc'
+#     namespace: test
+#   syncPolicy:
+#     automated: {}
+
+
+# demo-dev/root.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: all-apps
-  namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/olagunjuraman/jean-consulting'
-    path: 'demo-dev/applications'
+    repoURL: https://github.com/olagunjuraman/jean-consulting
     targetRevision: HEAD
+    path: demo-dev/applications
   destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: test
+    server: https://kubernetes.default.svc
+    namespace: argocd
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
+

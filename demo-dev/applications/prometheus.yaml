@@ -1,0 +1,40 @@
+# app1.yaml
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: example
+#   namespace: test
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://prometheus-community.github.io/helm-charts'
+#     chart: prometheus
+#     targetRevision: '15.5.3'
+#   destination:
+#     server: 'https://kubernetes.default.svc'
+#     namespace: test
+#   helm:
+#     valueFiles:
+#       - values.yaml
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/prometheus-community/helm-charts
+    targetRevision: main
+    path: charts/prometheus
+    helm:
+      valueFiles:
+        - values/prometheus-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
